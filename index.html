@@ -17,27 +17,73 @@
    
     
 
-    <input type="file" accept="video/*" capture="camera">
-    
+  
+    <video autoplay="true"></video>
    
       <script type="module" >
         import * as three from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js'
 
+        const videoElement = document.querySelector("video");
+const audioSelect = document.querySelector("select#audioSource");
+const videoSelect = document.querySelector("select#videoSource");
 
-var video = document.querySelector("#videoElement");
+navigator.mediaDevices
+  .enumerateDevices()
+  .then(gotDevices)
+  .then(getStream)
+  .catch(handleError);
 
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
+audioSelect.onchange = getStream;
+videoSelect.onchange = getStream;
+
+function gotDevices(deviceInfos) {
+  for (let i = 0; i !== deviceInfos.length; ++i) {
+    const deviceInfo = deviceInfos[i];
+    const option = document.createElement("option");
+    option.value = deviceInfo.deviceId;
+    if (deviceInfo.kind === "audioinput") {
+      option.text =
+        deviceInfo.label || "microphone " + (audioSelect.length + 1);
+      audioSelect.appendChild(option);
+    } else if (deviceInfo.kind === "videoinput") {
+      option.text = deviceInfo.label || "camera " + (videoSelect.length + 1);
+      videoSelect.appendChild(option);
+    } else {
+      console.log("Found another kind of device: ", deviceInfo);
+    }
+  }
 }
-// const video_element = document.getElementById( 'videoElement' );
-// const vidtexture = new three.VideoTexture( video_element );
 
+function getStream() {
+  if (window.stream) {
+    window.stream.getTracks().forEach(function (track) {
+      track.stop();
+    });
+  }
+
+  const constraints = {
+    audio: {
+      deviceId: { exact: audioSelect.value },
+    },
+    video: {
+      deviceId: { exact: videoSelect.value },
+    },
+  };
+
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(gotStream)
+    .catch(handleError);
+}
+
+function gotStream(stream) {
+  window.stream = stream; // make stream available to console
+  videoElement.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error("Error: ", error);
+}
 const scene = new three.Scene()
 
 const camera = new three.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 10000 )
