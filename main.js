@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>three test</title>
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
-  </head>
-  <body>
-    
-   
-    
-
-  
-    <video autoplay="true" id="videoElement">
-    </video>
-   
-      <script type="module" >
-        import * as three from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js'
+import * as three from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js'
 
 
 var video = document.querySelector("#videoElement");
@@ -68,10 +44,3 @@ function animate() {
 
 animate()
 
-
-      </script>
-
- 
- 
-  </body>
-</html>

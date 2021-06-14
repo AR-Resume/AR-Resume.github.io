@@ -1,0 +1,64 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+#container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+#videoElement {
+	width: 500px;
+	height: 375px;
+	background-color: #666;
+}
+
+.parent {
+  position: relative;
+  width: 1024px;
+  height: 768px;
+}
+#monitor, #mainCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+#monitor {
+  transform: scaleX(-1);
+  z-index: 1;
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+#mainCanvas {
+  transform: scaleX(-1);
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+canvas {
+  position:absolute;
+  top: 0;
+  left: 0;        
+}
+
+#videoElement {
+  position:absolute;
+  top: 0;
+  left: 0;
+  height:100vh;
+  width:100vw;
+}
