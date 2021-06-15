@@ -25,6 +25,7 @@
         import * as three from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js'
 
         var video = document.querySelector("#videoElement");
+        video.setAttribute("playsinline", true);
 
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
