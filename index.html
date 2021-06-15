@@ -26,6 +26,11 @@
 
         var video = document.querySelector("#videoElement");
         video.setAttribute("playsinline", true);
+        video.setAttribute("controls", true);
+setTimeout(() => {
+    video.removeAttribute("controls");
+});
+
 
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
