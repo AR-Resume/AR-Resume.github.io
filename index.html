@@ -13,11 +13,6 @@
     <link rel="stylesheet" type="text/css" href="style.css" /> 
   </head>
   <body>
-    
-   
-    
-
-  
     <video autoplay="true" id="videoElement">
     </video>
    
@@ -47,7 +42,7 @@ if (navigator.mediaDevices.getUserMedia) {
 const scene = new three.Scene()
 
 const camera = new three.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 10000 )
-
+camera.position.z = -50;
 const renderer = new three.WebGLRenderer({ alpha: true })
 renderer.setClearAlpha(0.0);
 renderer.setPixelRatio(devicePixelRatio)
@@ -55,7 +50,7 @@ renderer.setPixelRatio(devicePixelRatio)
 renderer.setSize(innerWidth, innerHeight)
 document.body.appendChild(renderer.domElement)
 
-const boxgeometry = new three.BoxGeometry(1,1,1)
+const boxgeometry = new three.BoxGeometry(16,9,16)
 const material = new three.MeshBasicMaterial({color: 0x00ff00})
 const mesh = new three.Mesh(boxgeometry, material)
 
